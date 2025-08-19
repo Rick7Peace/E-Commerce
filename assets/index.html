@@ -1,0 +1,51 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body onload="loadCards()">
+    <h1>Products</h1>
+    <div id="cardsPlaceholder"></div>
+    <script src="./index.js"></script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amalia's Crochet Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>🧶 Amalia's Crochet Shop</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Shop</a>
+      <a href="#" id="cart-btn">Cart 🛒 (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+
+  <!-- Product List -->
+  <main id="product-list"></main>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="hidden">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="cart-total">0</span></p>
+    <button id="checkout-btn">Checkout</button>
+    <button id="close-cart">Close</button>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+</html>

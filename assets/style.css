@@ -1,0 +1,193 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fefaf6;
+    color: #333;
+  }
+  
+  header {
+    background: #f7d9e3;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  nav a {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  #product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .product {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .product img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  button {
+    background: #f4978e;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  #cart-modal {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 2px solid #f4978e;
+    padding: 2rem;
+    border-radius: 10px;
+    display: none;
+    max-width: 400px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+
+
+
+/* --- Cart Modal Styles --- */
+#cart-modal {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 2px solid #f4978e;
+    padding: 2rem;
+    border-radius: 12px;
+    display: none;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+  
+  #cart-modal h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #f4978e;
+  }
+  
+/* Cart item layout */
+#cart-items li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  /* Thumbnail images */
+  .cart-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+  }
+    
+  .remove-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.2s;
+  }
+  
+  .remove-btn:hover {
+    background: #c0392b;
+  }
+  
+  #cart-total {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  #checkout-btn, #close-cart {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border-radius: 6px;
+  }
+  
+  #checkout-btn {
+    background: #2ecc71;
+  }
+  
+  #checkout-btn:hover {
+    background: #27ae60;
+  }
+  
+  #close-cart {
+    background: #bbb;
+  }
+  
+  #close-cart:hover {
+    background: #999;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  
+  .quantity-controls button {
+    background: #f4978e;
+    border: none;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .quantity-controls button:hover {
+    background: #d16d66;
+  }
+  
+  .quantity-controls span {
+    min-width: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
