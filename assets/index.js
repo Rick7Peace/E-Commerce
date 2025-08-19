@@ -243,6 +243,131 @@
 
 
 // Demo product data
+// const products = [
+//   { id: 1, name: "Crochet Hat", price: 25, image: "images/hat.jpg" },
+//   { id: 2, name: "Crochet Scarf", price: 30, image: "images/scarf.jpg" },
+//   { id: 3, name: "Crochet Bag", price: 40, image: "images/bag.jpg" }
+// ];
+
+// let cart = [];
+
+// // Render products
+// const productList = document.getElementById("product-list");
+// products.forEach(p => {
+//   const div = document.createElement("div");
+//   div.classList.add("product");
+//   div.innerHTML = `
+//     <img src="${p.image}" alt="${p.name}">
+//     <h3>${p.name}</h3>
+//     <p>$${p.price}</p>
+//     <button onclick="addToCart(${p.id})">Add to Cart</button>
+//   `;
+//   productList.appendChild(div);
+// });
+
+// // Add to cart (increase quantity if exists)
+// function addToCart(id) {
+//   const product = products.find(p => p.id === id);
+//   const existing = cart.find(item => item.id === id);
+
+//   if (existing) {
+//     existing.quantity++;
+//   } else {
+//     cart.push({ ...product, quantity: 1 });
+//   }
+
+//   updateCartCount();
+// }
+
+// // Update cart count (sum of all quantities)
+// function updateCartCount() {
+//   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+//   document.getElementById("cart-count").innerText = count;
+// }
+
+// // Show cart modal
+// const cartBtn = document.getElementById("cart-btn");
+// const cartModal = document.getElementById("cart-modal");
+// const closeCart = document.getElementById("close-cart");
+// const cartItems = document.getElementById("cart-items");
+// const cartTotal = document.getElementById("cart-total");
+
+// cartBtn.addEventListener("click", () => {
+//   cartModal.style.display = "block";
+//   renderCart();
+// });
+
+// closeCart.addEventListener("click", () => {
+//   cartModal.style.display = "none";
+// });
+
+// // Render cart with quantity controls
+// function renderCart() {
+//   cartItems.innerHTML = "";
+//   let total = 0;
+
+//   cart.forEach((item, index) => {
+//     const li = document.createElement("li");
+//     li.innerHTML = `
+//       <div class="cart-item">
+//         <img src="${item.image}" alt="${item.name}" class="cart-thumb">
+//         <span>${item.name} - $${item.price}</span>
+//       </div>
+//       <div class="quantity-controls">
+//         <button onclick="decreaseQty(${index})">-</button>
+//         <span>${item.quantity}</span>
+//         <button onclick="increaseQty(${index})">+</button>
+//         <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+//       </div>
+//     `;
+//     cartItems.appendChild(li);
+//     total += item.price * item.quantity;
+//   });
+
+//   cartTotal.innerText = total;
+// }
+
+// // Quantity functions
+// function increaseQty(index) {
+//   cart[index].quantity++;
+//   updateCartCount();
+//   renderCart();
+// }
+
+// function decreaseQty(index) {
+//   if (cart[index].quantity > 1) {
+//     cart[index].quantity--;
+//   } else {
+//     cart.splice(index, 1); // remove if goes below 1
+//   }
+//   updateCartCount();
+//   renderCart();
+// }
+
+// // Remove from cart
+// function removeFromCart(index) {
+//   cart.splice(index, 1);
+//   updateCartCount();
+//   renderCart();
+// }
+
+// // Fake checkout
+// const checkoutBtn = document.getElementById("checkout-btn");
+// checkoutBtn.addEventListener("click", () => {
+//   if (cart.length === 0) {
+//     alert("Your cart is empty!");
+//     return;
+//   }
+//   alert("Thanks for your order! 🧶✨");
+//   cart = []; // empty the cart after checkout
+//   updateCartCount();
+//   renderCart();
+//   cartModal.style.display = "none"; // close modal
+// });
+
+
+
+// Demo product data
 const products = [
   { id: 1, name: "Crochet Hat", price: 25, image: "images/hat.jpg" },
   { id: 2, name: "Crochet Scarf", price: 30, image: "images/scarf.jpg" },
@@ -251,7 +376,39 @@ const products = [
 
 let cart = [];
 
-// Render products
+// === LocalStorage Helpers ===
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function loadCart() {
+  const stored = localStorage.getItem("cart");
+  if (stored) {
+    cart = JSON.parse(stored);
+    updateCartCount();
+  }
+}
+
+function saveUserInfo() {
+  const userInfo = {
+    name: document.getElementById("checkout-name").value,
+    address: document.getElementById("checkout-address").value,
+    email: document.getElementById("checkout-email").value
+  };
+  localStorage.setItem("userInfo", JSON.stringify(userInfo));
+}
+
+function loadUserInfo() {
+  const stored = localStorage.getItem("userInfo");
+  if (stored) {
+    const userInfo = JSON.parse(stored);
+    document.getElementById("checkout-name").value = userInfo.name || "";
+    document.getElementById("checkout-address").value = userInfo.address || "";
+    document.getElementById("checkout-email").value = userInfo.email || "";
+  }
+}
+
+// === Render Products ===
 const productList = document.getElementById("product-list");
 products.forEach(p => {
   const div = document.createElement("div");
@@ -265,7 +422,7 @@ products.forEach(p => {
   productList.appendChild(div);
 });
 
-// Add to cart (increase quantity if exists)
+// === Cart Functions ===
 function addToCart(id) {
   const product = products.find(p => p.id === id);
   const existing = cart.find(item => item.id === id);
@@ -277,15 +434,14 @@ function addToCart(id) {
   }
 
   updateCartCount();
+  saveCart();
 }
 
-// Update cart count (sum of all quantities)
 function updateCartCount() {
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
   document.getElementById("cart-count").innerText = count;
 }
 
-// Show cart modal
 const cartBtn = document.getElementById("cart-btn");
 const cartModal = document.getElementById("cart-modal");
 const closeCart = document.getElementById("close-cart");
@@ -301,7 +457,7 @@ closeCart.addEventListener("click", () => {
   cartModal.style.display = "none";
 });
 
-// Render cart with quantity controls
+// Render cart with thumbnails + quantity controls
 function renderCart() {
   cartItems.innerHTML = "";
   let total = 0;
@@ -327,10 +483,11 @@ function renderCart() {
   cartTotal.innerText = total;
 }
 
-// Quantity functions
+// Quantity controls
 function increaseQty(index) {
   cart[index].quantity++;
   updateCartCount();
+  saveCart();
   renderCart();
 }
 
@@ -338,29 +495,54 @@ function decreaseQty(index) {
   if (cart[index].quantity > 1) {
     cart[index].quantity--;
   } else {
-    cart.splice(index, 1); // remove if goes below 1
+    cart.splice(index, 1);
   }
   updateCartCount();
+  saveCart();
   renderCart();
 }
 
-// Remove from cart
+// Remove item
 function removeFromCart(index) {
   cart.splice(index, 1);
   updateCartCount();
+  saveCart();
   renderCart();
 }
 
-// Fake checkout
+// === Checkout with user info ===
 const checkoutBtn = document.getElementById("checkout-btn");
 checkoutBtn.addEventListener("click", () => {
   if (cart.length === 0) {
     alert("Your cart is empty!");
     return;
   }
-  alert("Thanks for your order! 🧶✨");
-  cart = []; // empty the cart after checkout
+
+  // Save user info
+  saveUserInfo();
+
+  const name = document.getElementById("checkout-name").value;
+  const address = document.getElementById("checkout-address").value;
+  const email = document.getElementById("checkout-email").value;
+
+  if (!name || !address || !email) {
+    alert("Please fill in all checkout details!");
+    return;
+  }
+
+  // Fake confirmation
+  alert(`Thanks for your order, ${name}! 🧶✨\nYour items will be shipped to:\n${address}\nA confirmation has been sent to ${email}.`);
+
+  // Reset cart
+  cart = [];
   updateCartCount();
+  saveCart();
   renderCart();
-  cartModal.style.display = "none"; // close modal
+  cartModal.style.display = "none";
+});
+
+// === Load cart + user info on page load ===
+window.addEventListener("load", () => {
+  loadCart();
+  loadUserInfo();
 });

@@ -190,4 +190,25 @@ body {
     text-align: center;
     font-weight: bold;
   }
+
+  /* Checkout form styles */
+#checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  #checkout-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  
+  #checkout-form input {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
   

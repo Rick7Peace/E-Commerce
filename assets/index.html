@@ -37,14 +37,32 @@
   <!-- Product List -->
   <main id="product-list"></main>
 
-  <!-- Cart Modal -->
-  <div id="cart-modal" class="hidden">
-    <h2>Your Cart</h2>
-    <ul id="cart-items"></ul>
-    <p>Total: $<span id="cart-total">0</span></p>
-    <button id="checkout-btn">Checkout</button>
-    <button id="close-cart">Close</button>
-  </div>
+<!-- Cart Modal -->
+<div id="cart-modal" class="hidden">
+  <h2>Your Cart</h2>
+  <ul id="cart-items"></ul>
+  <p>Total: $<span id="cart-total">0</span></p>
+
+  <!-- Checkout Form -->
+  <form id="checkout-form">
+    <h3>Checkout Details</h3>
+    <label>
+      Name:
+      <input type="text" id="checkout-name" required>
+    </label>
+    <label>
+      Address:
+      <input type="text" id="checkout-address" required>
+    </label>
+    <label>
+      Email:
+      <input type="email" id="checkout-email" required>
+    </label>
+  </form>
+
+  <button id="checkout-btn">Checkout</button>
+  <button id="close-cart">Close</button>
+</div>
 
   <script src="./index.js"></script>
 </body>
